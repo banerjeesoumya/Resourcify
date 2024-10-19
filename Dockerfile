@@ -4,22 +4,23 @@ FROM node:16
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json for both frontend and backend
+# Copy the backend and frontend package.json files separately to install dependencies
 COPY backend/package*.json ./backend/
 COPY frontend/package*.json ./frontend/
 
-# Install backend dependencies
+# Install backend and frontend dependencies
 RUN npm install --prefix ./backend
-
-# Install frontend dependencies
 RUN npm install --prefix ./frontend
 
-# Copy the rest of the application code
+# Install global tools if needed (like vite and tsc)
+RUN npm install -g typescript vite
+
+# Copy the rest of the code
 COPY ./backend ./backend
 COPY ./frontend ./frontend
 
-# Expose ports for backend and frontend
+# Expose the ports for frontend and backend
 EXPOSE 3000 5173
 
-# Define a command that can run both services
-CMD ["sh", "-c", "npm run dev --prefix ./backend & npm run dev --prefix ./frontend"]
+# Run both frontend and backend services
+CMD npm run dev --prefix ./backend & npm run dev --prefix ./frontend
