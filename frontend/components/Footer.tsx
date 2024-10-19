@@ -3,7 +3,7 @@ export const Footer = () => {
     <footer className="mt-auto bg-gray-900 p-6 text-center text-gray-400">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between">
         <p className="text-gray-500">
-          © 2024 <span className="font-semibold text-white">Resourify </span>.
+          © 2024 <span className="font-semibold text-white">Resourcify </span>.
           All rights reserved.
         </p>
         <div className="mt-4 sm:mt-0">
