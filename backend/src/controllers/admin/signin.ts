@@ -1,6 +1,6 @@
-import { ADMIN_SECRET as  JWT_ADMIN_SECRET } from "../../config/config";
+import { ADMIN_SECRET as  JWT_ADMIN_SECRET } from "../../../api/config";
 import { adminSignin} from "../../zod";
-import { ADMIN_PASSWORD } from "../../config/config";
+import { ADMIN_PASSWORD } from "../../../api/config";
 import { User } from "../../db/db";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";

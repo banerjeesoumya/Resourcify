@@ -1,8 +1,8 @@
 import express from "express"
 import cors from "cors"
-import { router as Rootrouter } from "./routes";
+import { router as Rootrouter } from "./src/routes";
 import mongoose from "mongoose";
-import { FRONTEND_URL, MONGODB_URL } from "./config/config";
+import { FRONTEND_URL, MONGODB_URL } from "./api/config";
 import cookieParser from "cookie-parser"
 
 const app = express();
@@ -34,3 +34,5 @@ async function main() {
 }
 
 main();
+
+export default app;

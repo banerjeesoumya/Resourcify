@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User } from "../../db/db";  
-import { ADMIN_SECRET as  JWT_ADMIN_SECRET } from "../../config/config";
+import { ADMIN_SECRET as  JWT_ADMIN_SECRET } from "../../../api/config";
 import { adminSignup} from "../../zod";
-import { ADMIN_PASSWORD } from "../../config/config";
+import { ADMIN_PASSWORD } from "../../../api/config";
 
 
 export const Signup = async (req:any, res:any) => {

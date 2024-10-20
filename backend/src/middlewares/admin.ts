@@ -1,5 +1,5 @@
 import jwt, { JwtPayload } from "jsonwebtoken"
-import {ADMIN_SECRET} from "../config/config"
+import {ADMIN_SECRET} from "../../api/config"
 import { NextFunction,Response } from "express";
 
 export default function adminMiddleware(req:any, res:Response, next:NextFunction) {

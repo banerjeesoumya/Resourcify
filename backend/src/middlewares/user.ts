@@ -1,5 +1,5 @@
 import jwt, { JwtPayload } from "jsonwebtoken"
-import { JWT_SECRET as JWT_USER_PASSWORD} from "../config/config"
+import { JWT_SECRET as JWT_USER_PASSWORD} from "../../api/config"
 import { NextFunction, Response } from "express";
 
 export function userMiddleware(req:any,res:Response,next:NextFunction) {
