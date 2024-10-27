@@ -1,45 +1,56 @@
+
 version: '3'
+
 services:
   backend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.backend
     container_name: backend-container
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
-      - MONGODB_URL=mongodb://mongo:27017/my_database
+      - MONGODB_URL=mongodb://root:example@mongo:27016/my_database?authSource=admin
       - ADMIN_SECRET=secret
       - JWT_SECRET=secret
       - ADMIN_PASSWORD=secret
-      - FRONTEND_URL = http://localhost:5173
-      - NODE_ENV = development
+      - FRONTEND_URL=http://localhost:5173
+      - NODE_ENV=development
     depends_on:
       - mongo
     volumes:
       - ./backend:/app/backend
-    command: npm run dev --prefix ./backend
+      - backend-node-modules:/app/backend/node_modules
+    command: bash -c "npm install && npm run build && npm start"
 
   frontend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.frontend
     container_name: frontend-container
     ports:
-      - "5173:5173"
+      - '5173:5173'
     environment:
       - VITE_BACKEND=http://localhost:3000
     volumes:
       - ./frontend:/app/frontend
-    command: npm run dev --prefix ./frontend
+      - frontend-node-modules:/app/frontend/node_modules
+    command: bash -c "npm install && npm run dev"
 
   mongo:
     image: mongo:latest
-    container_name: mongo-container
+    restart: always
     ports:
-      - "27017:27017"
+      - '8080:8081'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27016/
+      ME_CONFIG_BASICAUTH: false
     volumes:
       - mongo-data:/data/db
 
 volumes:
   mongo-data:
+  backend-node-modules:
+  frontend-node-modules:
